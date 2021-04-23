@@ -39,7 +39,7 @@ class _HomeStatefulWidgetState extends State<Home> {
         debugShowCheckedModeBanner: false,
         routes: {
           '/graduate_students': (context) => GraduateStudents(),
-          '/person_info': (context) => PersonInfo(GraduatesRepository()),
+          PersonInfo.routeName: (context) => PersonInfo(GraduatesRepository()),
           '/setting': (context) => Settings(),
         },
         home: Scaffold(
