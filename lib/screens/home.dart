@@ -37,9 +37,19 @@ class _HomeStatefulWidgetState extends State<Home> {
       onWillPop: _onBackPressed,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        onGenerateRoute: (settings) {
+          if (settings.name == PersonInfo.routeName) {
+            final GraduateStudentsArguments args =
+                settings.arguments as GraduateStudentsArguments;
+            return MaterialPageRoute(
+              builder: (context) {
+                return PersonInfo(GraduatesRepository(), args.idStudents);
+              },
+            );
+          }
+        },
         routes: {
           '/graduate_students': (context) => GraduateStudents(),
-          PersonInfo.routeName: (context) => PersonInfo(GraduatesRepository()),
           '/setting': (context) => Settings(),
         },
         home: Scaffold(

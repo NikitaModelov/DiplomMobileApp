@@ -2,15 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/data/model/graduate_info.dart';
 import 'package:flutter_application/data/repository/graduates_repository.dart';
+import 'package:flutter_application/screens/graduate_students.dart';
 import 'package:flutter_application/screens/link_dialog.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class PersonInfo extends StatefulWidget {
   static const routeName = "/person_info";
 
+  final int idStudents;
+
   final GraduatesRepository _repository;
 
-  PersonInfo(this._repository);
+  PersonInfo(this._repository, this.idStudents);
 
   @override
   _PersonInfoState createState() => _PersonInfoState();
@@ -26,7 +29,7 @@ class _PersonInfoState extends State<PersonInfo>
   void initState() {
     super.initState();
 
-    widget._repository.getGraduateInfo(3).then((value) => {
+    widget._repository.getGraduateInfo(widget.idStudents).then((value) => {
           setState(() {
             _graduate = value;
             _isLoading = false;
@@ -122,7 +125,8 @@ class _PersonInfoState extends State<PersonInfo>
               SizedBox(
                 height: 20,
               ),
-              _buildTextBlockColumn("Достижения", _graduate.achievement),
+              _buildTextBlockColumn("Достижения",
+                  _graduate.achievement != null ? _graduate.achievement : " "),
               SizedBox(
                 height: 20,
               ),

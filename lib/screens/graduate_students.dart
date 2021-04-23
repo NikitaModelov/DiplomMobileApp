@@ -5,6 +5,12 @@ import 'package:flutter_application/screens/person_info.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:flutter_application/data/repository/graduates_repository.dart';
 
+class GraduateStudentsArguments {
+  final int idStudents;
+
+  GraduateStudentsArguments(this.idStudents);
+}
+
 class GraduateStudents extends StatefulWidget {
   final GraduatesRepository _repository = GraduatesRepository();
 
@@ -99,6 +105,7 @@ Widget groupedYearListView(List<GraduateCard> list) {
             Navigator.pushNamed(
               context,
               PersonInfo.routeName,
+              arguments: GraduateStudentsArguments(element.id),
             );
           },
           leading: Container(
