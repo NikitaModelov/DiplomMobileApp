@@ -2,15 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/data/model/graduate_info.dart';
 import 'package:flutter_application/data/repository/graduates_repository.dart';
+import 'package:flutter_application/screens/graduate_students.dart';
 import 'package:flutter_application/screens/link_dialog.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class PersonInfo extends StatefulWidget {
-  final GraduatesRepository _repository;
-  PersonInfo(this._repository);
+  static const routeName = "/person_info";
 
-  
-  
+  final int idStudents;
+
+  final GraduatesRepository _repository;
+
+  PersonInfo(this._repository, this.idStudents);
+
   @override
   _PersonInfoState createState() => _PersonInfoState();
 }
@@ -22,15 +26,16 @@ class _PersonInfoState extends State<PersonInfo>
   GraduateInfo _graduate;
 
   @override
-void initState() {
-  super.initState();
-  widget._repository.getGraduateInfo().then((value) => {
-    setState(() {
-      _graduate = value;
-      _isLoading = false;
-    })
-  });
-}
+  void initState() {
+    super.initState();
+
+    widget._repository.getGraduateInfo(widget.idStudents).then((value) => {
+          setState(() {
+            _graduate = value;
+            _isLoading = false;
+          })
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +100,8 @@ void initState() {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildTextBlockColumn("ФИО", "${_graduate.patronymic} ${_graduate.firstName} ${_graduate.patronymic}"),
+              _buildTextBlockColumn("ФИО",
+                  "${_graduate.patronymic} ${_graduate.firstName} ${_graduate.patronymic}"),
               SizedBox(
                 height: 20,
               ),
@@ -107,8 +113,7 @@ void initState() {
               SizedBox(
                 height: 20,
               ),
-              _buildTextBlockColumn(
-                  "Специальность", _graduate.speciality),
+              _buildTextBlockColumn("Специальность", _graduate.speciality),
               SizedBox(
                 height: 20,
               ),
@@ -120,8 +125,8 @@ void initState() {
               SizedBox(
                 height: 20,
               ),
-              _buildTextBlockColumn(
-                  "Достижения", _graduate.achievement),
+              _buildTextBlockColumn("Достижения",
+                  _graduate.achievement != null ? _graduate.achievement : " "),
               SizedBox(
                 height: 20,
               ),
