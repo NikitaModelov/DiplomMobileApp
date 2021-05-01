@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/bloc_arch/home/widget/home_screen.dart';
-import 'package:flutter_application/screens/home.dart';
 import 'package:flutter_application/utills/size.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -93,7 +92,7 @@ class SignInScreen extends StatelessWidget {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (BuildContext context) => Home(),
+                                  builder: (BuildContext context) => HomeScreen(),
                                 ),
                               );
                             },
