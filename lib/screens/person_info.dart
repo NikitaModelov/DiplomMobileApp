@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/data/model/graduate_info.dart';
 import 'package:flutter_application/data/repository/graduates_repository.dart';
-import 'package:flutter_application/screens/graduate_students.dart';
 import 'package:flutter_application/screens/link_dialog.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 

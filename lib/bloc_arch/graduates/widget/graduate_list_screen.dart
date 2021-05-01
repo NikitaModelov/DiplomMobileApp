@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/bloc_arch/common/error_screen.dart';
+import 'package:flutter_application/bloc_arch/graduateinfo/widget/graduate_info_screen.dart';
 import 'package:flutter_application/bloc_arch/graduates/component/graduate_list_component.dart';
 import 'package:flutter_application/bloc_arch/graduates/events/graduate_list_event.dart';
 import 'package:flutter_application/data/model/graduate_card.dart';
@@ -92,7 +93,13 @@ class _GraduateListScreenState extends State<GraduateListScreen> {
         return Container(
           margin: new EdgeInsets.only(top: 7.5),
           child: ListTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                GraduateInfoScreen.routeName,
+                arguments: GraduateListScreenArg(element.id),
+              );
+            },
             leading: Container(
               height: 60,
               width: 60,
