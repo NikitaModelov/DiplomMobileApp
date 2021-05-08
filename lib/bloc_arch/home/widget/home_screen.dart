@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        '/graduate_info': (context) => GraduateInfoScreen(),
+        GraduateInfoScreen.routeName: (context) => GraduateInfoScreen(),
       },
       home: Scaffold(
         extendBody: true,
