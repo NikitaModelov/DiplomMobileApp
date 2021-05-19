@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/screens/signin.dart';
+import 'package:flutter_application/bloc_arch/signin/widget/sign_in_screen.dart';
+import 'package:flutter_application/utills/hive_boxes.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 // *
 // !
 // ?
 // TODO:
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  Hive.box(HiveBoxes.CONFIGURATION);
   runApp(MyApp());
 }
 

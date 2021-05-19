@@ -38,11 +38,17 @@ dependencies:
 
   equatable: ^2.0.0
 
+  hive: ^2.0.4
+  hive_flutter: ^1.0.0
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
 
 dev_dependencies:
+  hive_generator: ^1.1.0
+  build_runner: ^2.0.3
+
   flutter_test:
     sdk: flutter
 
@@ -62,23 +68,23 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
-  - assets/images/background_signin.png
-  - assets/images/background_profile.png
+    - assets/images/background_signin.png
+    - assets/images/background_profile.png
 
-  # logo assets
-  - assets/logo/facebook.png
-  - assets/logo/instagram.png
-  - assets/logo/vk.png
-  - assets/logo/ok.png
-  - assets/logo/tik_tok.png
-  - assets/logo/twitter.png
-  - assets/logo/you_tube.png
-  - assets/logo/telegram.png
-  - assets/logo/e_mail.png
+    # logo assets
+    - assets/logo/facebook.png
+    - assets/logo/instagram.png
+    - assets/logo/vk.png
+    - assets/logo/ok.png
+    - assets/logo/tik_tok.png
+    - assets/logo/twitter.png
+    - assets/logo/you_tube.png
+    - assets/logo/telegram.png
+    - assets/logo/e_mail.png
 
-  # Animation
-  - assets/anim/in_dev.json
-  - assets/anim/sad_emoji.json
+    # Animation
+    - assets/anim/in_dev.json
+    - assets/anim/sad_emoji.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

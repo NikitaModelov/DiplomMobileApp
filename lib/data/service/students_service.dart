@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_application/data/model/graduate_card.dart';
 
 class NetworkData {
-  static const String BASE_URL = "10.0.2.2:8080";
+  static const String BASE_URL = "10.0.2.2:8080/api";
 }
 
 Future<List<GraduateCard>> fetchGraduates(String year, String faculty) async {
