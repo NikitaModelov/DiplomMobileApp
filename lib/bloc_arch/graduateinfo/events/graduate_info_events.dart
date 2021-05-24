@@ -5,7 +5,7 @@ abstract class GraduateInfoEvents extends Equatable {
 }
 
 class GraduateInfoRequested extends GraduateInfoEvents {
-  final int id;
+  final String id;
 
   const GraduateInfoRequested(this.id)
       : assert(id != null);

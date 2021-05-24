@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GraduateInfoComponent
     extends Bloc<GraduateInfoEvents, GraduateInfoState> {
-  final int id;
+  final String id;
 
   GraduateInfoComponent(this.id) : super(null) {
     add(GraduateInfoRequested(id));
