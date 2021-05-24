@@ -11,7 +11,8 @@ class TokenPair {
   TokenPair({this.token, this.refreshToken});
 
   factory TokenPair.fromJson(Map<String, dynamic> json) {
-    return TokenPair(token: json['accessToken'], refreshToken: json['refreshToken']);
+    return TokenPair(
+        token: json['accessToken'], refreshToken: json['refreshToken']);
   }
 }
 
@@ -19,7 +20,7 @@ class LoginInfo {
   final String email;
   final String password;
 
-  LoginInfo({@required this.email,@required this.password});
+  LoginInfo({@required this.email, @required this.password});
 }
 
 class Result<T> {
@@ -31,20 +32,15 @@ class Result<T> {
 
 class SignInApiService {
   static Future<Result<TokenPair>> signIn(LoginInfo loginInfo) async {
-
     try {
       var url = Uri.https(NetworkData.BASE_URL, '/api/login');
 
-      final response = await http.post(
-        url,
-        body: jsonEncode({
-          'email': '${loginInfo.email}',
-          'password': '${loginInfo.password}'
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      );
+      final response = await http.post(url,
+          body: jsonEncode({
+            'email': '${loginInfo.email}',
+            'password': '${loginInfo.password}'
+          }),
+          headers: {'Content-Type': 'application/json'});
       if (response.statusCode == 202) {
         debugPrint("${response.body}");
         return Result(
@@ -53,9 +49,7 @@ class SignInApiService {
         );
       } else {
         debugPrint("${response.statusCode}");
-        return Result(
-            statusCode: response.statusCode,
-            result: null);
+        return Result(statusCode: response.statusCode, result: null);
       }
     } catch (e) {
       debugPrint("Error: $e");
@@ -65,17 +59,27 @@ class SignInApiService {
   static Future<int> validate(String token) async {
     try {
       var url = Uri.https(NetworkData.BASE_URL, '/api/validate');
-      final response = await http.get(
-          url,
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer $token'
-          }
-      );
+      final response = await http.get(url, headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token'
+      });
       debugPrint("validate: ${token}");
       debugPrint("validate: ${response.statusCode}");
       return response.statusCode;
+    } catch (e) {
+      debugPrint("Error: $e");
+    }
+  }
 
+  static Future<int> logOut(String token) async {
+    try {
+      var url = Uri.https(NetworkData.BASE_URL, '/api/logout');
+      final response = await http.get(url, headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token'
+      });
+
+      return response.statusCode;
     } catch (e) {
       debugPrint("Error: $e");
     }
@@ -85,15 +89,13 @@ class SignInApiService {
     debugPrint("refreshToken: $refreshToken");
     try {
       var url = Uri.https(NetworkData.BASE_URL, '/api/refresh');
-      final response = await http.post(
-          url,
+      final response = await http.post(url,
           body: jsonEncode({
             'refreshToken': '$refreshToken',
           }),
           headers: {
             'Content-Type': 'application/json',
-          }
-      );
+          });
 
       if (response.statusCode == 200) {
         debugPrint("${response.body}");
@@ -103,11 +105,8 @@ class SignInApiService {
         );
       } else {
         debugPrint("refreshToken: ${response.statusCode}");
-        return Result(
-            statusCode: response.statusCode,
-            result: null);
+        return Result(statusCode: response.statusCode, result: null);
       }
-
     } catch (e) {
       debugPrint("Error: $e");
     }

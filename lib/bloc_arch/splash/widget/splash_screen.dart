@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/bloc_arch/graduates/widget/graduate_list_screen.dart';
 import 'package:flutter_application/bloc_arch/home/widget/home_screen.dart';
 import 'package:flutter_application/bloc_arch/signin/widget/sign_in_screen_test.dart';
 import 'package:flutter_application/bloc_arch/splash/component/splash_component.dart';
-import 'package:flutter_application/bloc_arch/splash/events/splash_events.dart';
 import 'package:flutter_application/bloc_arch/splash/states/splash_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
+  static const String routerName = "/splash";
+
   @override
   State<StatefulWidget> createState() => _SplashScreenState();
 }

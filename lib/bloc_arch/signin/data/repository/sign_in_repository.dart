@@ -43,6 +43,17 @@ class SignInRepository {
     }
   }
 
+  static Future<int> logOut() async {
+    var box = await Hive.openBox(HiveBoxes.CONFIGURATION);
+    var token = box.get(TokenKey.ACCESS_TOKEN);
+
+    var code = await SignInApiService.logOut(token);
+    if (code == 200) {
+      box.clear();
+      return 200;
+    }
+  }
+
   static Future<Result<TokenPair>> _refreshToken() async {
     var box = await Hive.openBox(HiveBoxes.CONFIGURATION);
     var token = box.get(TokenKey.REFRESH_TOKEN);

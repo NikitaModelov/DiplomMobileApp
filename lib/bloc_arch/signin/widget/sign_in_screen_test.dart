@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application/bloc_arch/home/widget/home_screen.dart';
 import 'package:flutter_application/bloc_arch/signin/data/api/sign_in_api_service.dart';
 import 'package:flutter_application/bloc_arch/signin/data/repository/sign_in_repository.dart';
 import 'package:flutter_application/utills/hive/hive_boxes.dart';
@@ -8,6 +9,7 @@ import 'package:hive/hive.dart';
 
 class LoginPage extends StatefulWidget {
   static const String routeName = '/login_page';
+
   @override
   _LoginPageState createState() => new _LoginPageState();
 }
@@ -24,11 +26,8 @@ class _LoginPageState extends State<LoginPage> {
     setState(() => _password = text);
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-
     final email = TextFormField(
       onChanged: _changeEmail,
       initialValue: "modelov.n.a@mail.ru",
@@ -42,8 +41,7 @@ class _LoginPageState extends State<LoginPage> {
           color: Colors.grey,
         ),
         enabledBorder: UnderlineInputBorder(
-          borderSide:
-          BorderSide(color: Color(0xff0881D1)),
+          borderSide: BorderSide(color: Color(0xff0881D1)),
         ),
       ),
     );
@@ -61,8 +59,7 @@ class _LoginPageState extends State<LoginPage> {
           color: Colors.grey,
         ),
         enabledBorder: UnderlineInputBorder(
-          borderSide:
-          BorderSide(color: Color(0xff0881D1)),
+          borderSide: BorderSide(color: Color(0xff0881D1)),
         ),
       ),
     );
@@ -76,7 +73,11 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: BorderRadius.circular(8.0),
         ),
         onPressed: () async {
-          await SignInRepository.signIn(LoginInfo(email: _email, password: _password));
+          var response = await SignInRepository.signIn(
+              LoginInfo(email: _email, password: _password));
+          if (response == 202) {
+            Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+          }
         },
         padding: EdgeInsets.all(10.0),
         color: Color(0xff0881D1),
