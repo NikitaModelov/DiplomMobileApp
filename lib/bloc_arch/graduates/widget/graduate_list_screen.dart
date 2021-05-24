@@ -3,18 +3,20 @@ import 'package:flutter_application/bloc_arch/common/error_screen.dart';
 import 'package:flutter_application/bloc_arch/graduateinfo/widget/graduate_info_screen.dart';
 import 'package:flutter_application/bloc_arch/graduates/component/graduate_list_component.dart';
 import 'package:flutter_application/bloc_arch/graduates/events/graduate_list_event.dart';
+import 'package:flutter_application/bloc_arch/graduates/states/graduate_list_states.dart';
 import 'package:flutter_application/data/model/graduate_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grouped_list/grouped_list.dart';
-import 'package:flutter_application/bloc_arch/graduates/states/graduate_list_states.dart';
 
 class GraduateListScreenArg {
-  final int id;
+  final String id;
 
   GraduateListScreenArg(this.id);
 }
 
 class GraduateListScreen extends StatefulWidget {
+  static const String routeName = "/graduates_page";
+
   @override
   State<StatefulWidget> createState() {
     return _GraduateListScreenState();
@@ -76,7 +78,7 @@ class _GraduateListScreenState extends State<GraduateListScreen> {
       physics: const AlwaysScrollableScrollPhysics(),
       padding: const EdgeInsets.only(bottom: 80),
       elements: list,
-      groupBy: (element) => element.group,
+      groupBy: (element) => element.scope.group,
       groupComparator: (value1, value2) => value2.compareTo(value1),
       order: GroupedListOrder.DESC,
       useStickyGroupSeparators: true,

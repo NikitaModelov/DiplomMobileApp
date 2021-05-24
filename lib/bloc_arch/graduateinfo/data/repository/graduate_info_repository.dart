@@ -2,7 +2,7 @@ import 'package:flutter_application/bloc_arch/graduateinfo/data/api/graduate_inf
 import 'package:flutter_application/data/model/graduate_info.dart';
 
 class GraduateInfoRepository {
-  static Future<GraduateInfo> getGraduateInfo(int id) async {
+  static Future<GraduateInfo> getGraduateInfo(String id) async {
     return GraduateInfoApiService.fetchGraduateById(id);
   }
 }

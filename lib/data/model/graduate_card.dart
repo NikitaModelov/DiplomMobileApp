@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
 class GraduateCard {
-  final int id;
+  final String id;
   final String firstName;
   final String secondName;
   final String patronymic;
   final String yearGraduate;
-  final String group;
+  final UserScope scope;
   final String urlImage;
 
   GraduateCard(
@@ -15,7 +15,7 @@ class GraduateCard {
       @required this.secondName,
       @required this.patronymic,
       @required this.yearGraduate,
-      @required this.group,
+      @required this.scope,
       @required this.urlImage});
 
   factory GraduateCard.fromJson(Map<String, dynamic> json) {
@@ -23,9 +23,18 @@ class GraduateCard {
         firstName: json['firstName'],
         yearGraduate: json['yearGraduate'],
         secondName: json['secondName'],
-        urlImage: json['urlImage'],
+        urlImage: json['imageUrl'],
         patronymic: json['patronymic'],
-        group: json['group'],
-        id: json['id']);
+        scope: json['scope'],
+        id: json['_id']);
   }
+}
+
+class UserScope {
+  final String group;
+  final String faculty;
+  final String specialty;
+
+  UserScope(
+      {@required this.group, @required this.faculty, @required this.specialty});
 }

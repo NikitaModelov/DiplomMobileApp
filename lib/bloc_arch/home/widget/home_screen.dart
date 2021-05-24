@@ -2,11 +2,15 @@ import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/bloc_arch/graduateinfo/widget/graduate_info_screen.dart';
 import 'package:flutter_application/bloc_arch/graduates/widget/graduate_list_screen.dart';
+import 'package:flutter_application/bloc_arch/settings/widget/setting_screen.dart';
+import 'package:flutter_application/bloc_arch/splash/widget/splash_screen.dart';
 import 'package:flutter_application/screens/faculty.dart';
 import 'package:flutter_application/screens/party.dart';
 import 'package:flutter_application/screens/profile.dart';
 
 class HomeScreen extends StatefulWidget {
+
+  static const routeName = "/home";
 
   @override
   State<StatefulWidget> createState() => _HomeScreenState();
@@ -35,6 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
       debugShowCheckedModeBanner: false,
       routes: {
         GraduateInfoScreen.routeName: (context) => GraduateInfoScreen(),
+        SettingsScreen.routerName: (context) => SettingsScreen(),
+        SplashScreen.routerName: (context) => SplashScreen(),
       },
       home: Scaffold(
         extendBody: true,

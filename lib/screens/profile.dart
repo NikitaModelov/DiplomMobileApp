@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/bloc_arch/settings/widget/setting_screen.dart';
 import 'package:flutter_application/utills/size.dart';
 
 class Profile extends StatelessWidget {
@@ -19,7 +20,9 @@ class Profile extends StatelessWidget {
               Icons.settings,
               color: Colors.black,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, SettingsScreen.routerName);
+            },
           ),
         ],
       ),
