@@ -30,10 +30,11 @@ class _GraduateListScreenState extends State<GraduateListScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GraduateListComponent('2021', 'Бизнес-информатика'),
+      create: (context) => GraduateListComponent('2021'),
       child: BlocBuilder<GraduateListComponent, GraduateListState>(
         builder: (context, state) {
           if (state is GraduateListLoadSuccess) {
+            debugPrint("SUCCESS STATE");
             return Scaffold(
               appBar: _buildAppBar(),
               body: RefreshIndicator(
@@ -42,12 +43,13 @@ class _GraduateListScreenState extends State<GraduateListScreen> {
                 onRefresh: () async {
                   BlocProvider.of<GraduateListComponent>(context).add(
                       GraduateListRequested(
-                          year: '2021', faculty: 'Бизнес-информатика'));
+                          year: '2021'));
                 },
                 child: _buildList(state.graduates),
               ),
             );
           } else if (state is GraduateListLoadInProgress) {
+            debugPrint("PROGRESS STATE");
             return Scaffold(
               appBar: _buildAppBar(),
               body: Center(
@@ -55,6 +57,7 @@ class _GraduateListScreenState extends State<GraduateListScreen> {
               ),
             );
           } else {
+            debugPrint("ERROR STATE");
             return Scaffold(
               appBar: _buildAppBar(),
               body: RefreshIndicator(
@@ -63,7 +66,7 @@ class _GraduateListScreenState extends State<GraduateListScreen> {
                   onRefresh: () async {
                     BlocProvider.of<GraduateListComponent>(context).add(
                         GraduateListRequested(
-                            year: '2021', faculty: 'Бизнес-информатика'));
+                            year: '2021'));
                   },
                   child: ErrorScreen()),
             );

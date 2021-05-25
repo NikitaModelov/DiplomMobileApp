@@ -6,12 +6,11 @@ abstract class GraduateListEvent extends Equatable {
 
 class GraduateListRequested extends GraduateListEvent {
   final String year;
-  final String faculty;
 
-  const GraduateListRequested({this.year, this.faculty})
-      : assert(year != null, faculty != null);
+  const GraduateListRequested({this.year})
+      : assert(year != null);
 
   @override
-  List<Object> get props => [year, faculty];
+  List<Object> get props => [year];
 }
 

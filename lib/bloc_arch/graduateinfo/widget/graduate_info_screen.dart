@@ -109,7 +109,7 @@ class _GraduateInfoScreenState extends State<GraduateInfoScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildTextBlockColumn("ФИО",
-                  "${graduate.patronymic} ${graduate.firstName} ${graduate.patronymic}"),
+                  "${graduate.secondName} ${graduate.firstName} ${graduate.patronymic}"),
               SizedBox(
                 height: 20,
               ),
@@ -117,15 +117,15 @@ class _GraduateInfoScreenState extends State<GraduateInfoScreen> {
               SizedBox(
                 height: 20,
               ),
-              _buildTextBlockColumn("Факультет", graduate.faculty),
+              _buildTextBlockColumn("Факультет", graduate.scope.faculty),
               SizedBox(
                 height: 20,
               ),
-              _buildTextBlockColumn("Специальность", graduate.speciality),
+              _buildTextBlockColumn("Специальность", graduate.scope.specialty),
               SizedBox(
                 height: 20,
               ),
-              _buildTextBlockColumn("Группа", graduate.group),
+              _buildTextBlockColumn("Группа", graduate.scope.group),
               SizedBox(
                 height: 20,
               ),
@@ -256,7 +256,7 @@ class _GraduateInfoScreenState extends State<GraduateInfoScreen> {
                     "Факультет",
                   ),
                   Text(
-                    graduate.faculty,
+                    graduate.scope.faculty,
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,

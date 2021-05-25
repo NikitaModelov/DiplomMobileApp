@@ -5,9 +5,12 @@ import 'package:flutter_application/data/service/students_service.dart';
 import 'package:http/http.dart' as http;
 
 class GraduateInfoApiService {
-  static Future<GraduateInfo> fetchGraduateById(String id) async {
-    var url = Uri.http(NetworkData.BASE_URL, 'graduate_student/$id');
-    final response = await http.get(url).timeout(Duration(seconds: 10));
+  static Future<GraduateInfo> fetchGraduateById(String id, String token) async {
+    var url = Uri.https(NetworkData.BASE_URL, 'api/graduate_student/$id');
+    final response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token'
+    }).timeout(Duration(seconds: 10));
 
     if (response.statusCode == 200) {
       return GraduateInfo.fromJson(jsonDecode(response.body));

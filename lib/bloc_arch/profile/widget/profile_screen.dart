@@ -1,38 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/bloc_arch/common/error_screen.dart';
+import 'package:flutter_application/bloc_arch/profile/component/profile_component.dart';
+import 'package:flutter_application/bloc_arch/profile/data/model/profile_model.dart';
+import 'package:flutter_application/bloc_arch/profile/states/profile_state.dart';
 import 'package:flutter_application/bloc_arch/settings/widget/setting_screen.dart';
-import 'package:flutter_application/utills/size.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-@Deprecated("")
-class Profile extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
+  static const String routerName = "/profile_screen";
+
+  @override
+  State<StatefulWidget> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 1,
-        title: Text(
-          "Профиль",
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Navigator.pushNamed(context, SettingsScreen.routerName);
-            },
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.only(
-          bottom: 80,
-        ),
-        physics: BouncingScrollPhysics(),
-        child: buildColumn(context),
+    return BlocProvider(
+      create: (context) => ProfileComponent(),
+      child: BlocBuilder<ProfileComponent, ProfileState>(
+        builder: (context, state) {
+          if (state is ProfileLoading || state is ProfileInitial) {
+            return CircularProgressIndicator();
+          } else if (state is ProfileSuccess) {
+            return Scaffold(
+              backgroundColor: Colors.white,
+              appBar: AppBar(
+                elevation: 1,
+                title: Text(
+                  "Профиль",
+                  style: TextStyle(color: Colors.black),
+                ),
+                backgroundColor: Colors.white,
+                actions: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.settings,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, SettingsScreen.routerName);
+                    },
+                  ),
+                ],
+              ),
+              body: SingleChildScrollView(
+                padding: EdgeInsets.only(
+                  bottom: 80,
+                ),
+                physics: BouncingScrollPhysics(),
+                child: buildColumn(context, state.profile),
+              ),
+            );
+          } else {
+            return ErrorScreen();
+          }
+        },
       ),
     );
   }
@@ -51,7 +75,7 @@ class Profile extends StatelessWidget {
     );
   }
 
-  Column buildColumn(BuildContext context) {
+  Column buildColumn(BuildContext context, Profile profile) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -69,7 +93,8 @@ class Profile extends StatelessWidget {
                   fit: BoxFit.cover,
                   alignment: Alignment.topCenter,
                   image: NetworkImage(
-                      'https://images.pexels.com/photos/6732915/pexels-photo-6732915.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
+                    profile.imageUrl,
+                  ),
                 ),
                 boxShadow: [
                   BoxShadow(
@@ -85,7 +110,7 @@ class Profile extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(top: 20),
               child: Text(
-                "Дарья Открывашкина",
+                "${profile.firstName} ${profile.secondName}",
                 style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -98,14 +123,14 @@ class Profile extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("2021 год"),
+                Text(profile.yearGraduate),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 8),
                   height: 15,
                   width: 2,
                   color: Colors.grey,
                 ),
-                Text("СМТ-511"),
+                Text(profile.scopeGroup.group),
               ],
             ),
             SizedBox(
@@ -122,7 +147,7 @@ class Profile extends StatelessWidget {
                 SizedBox(
                   width: 2,
                 ),
-                Text("Новосибирск, Россия"),
+                Text(profile.locate),
               ],
             ),
           ],
@@ -204,21 +229,21 @@ class Profile extends StatelessWidget {
                 children: [
                   getInfoCard(
                     label: 'ФИО',
-                    info: 'Открывашкина Дарья Ивановна',
+                    info: '${profile.firstName} ${profile.secondName} ${profile.patronymic == null ?  "" : profile.patronymic }',
                   ),
                   SizedBox(
                     height: 14,
                   ),
                   getInfoCard(
                     label: 'Дата рождения',
-                    info: '11.06.1999',
+                    info: '${profile.birthday}',
                   ),
                   SizedBox(
                     height: 14,
                   ),
                   getInfoCard(
                     label: 'Факультет',
-                    info: 'Мосты и тоннели',
+                    info: '${profile.scopeGroup.faculty}',
                   ),
                   SizedBox(
                     height: 14,
@@ -226,28 +251,28 @@ class Profile extends StatelessWidget {
                   getInfoCard(
                     label: 'Специальность',
                     info:
-                        'Строительство железных дорог, мостов и транспортных тоннелей',
+                        '${profile.scopeGroup.specialty}',
                   ),
                   SizedBox(
                     height: 14,
                   ),
                   getInfoCard(
                     label: 'Достижения',
-                    info: 'Закончила с красным дипломом',
+                    info: '${profile.achievement}',
                   ),
                   SizedBox(
                     height: 14,
                   ),
                   getInfoCard(
                     label: 'Местоположение',
-                    info: 'Новосибирск, Россия',
+                    info: '${profile.locate}',
                   ),
                   SizedBox(
                     height: 14,
                   ),
                   getInfoCard(
                     label: 'Место работы',
-                    info: 'Москва-Маурер-Мост',
+                    info: '${profile.workPlace}',
                   ),
                 ],
               ),

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_application/bloc_arch/graduates/data/repository/graduate_list_repository.dart';
 import 'package:flutter_application/bloc_arch/graduates/events/graduate_list_event.dart';
 import 'package:flutter_application/bloc_arch/graduates/states/graduate_list_states.dart';
@@ -6,10 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GraduateListComponent extends Bloc<GraduateListEvent, GraduateListState> {
   final String year;
-  final String faculty;
 
-  GraduateListComponent(this.year, this.faculty) : super(null) {
-    add(GraduateListRequested(year: year, faculty: faculty));
+  GraduateListComponent(this.year) : super(null) {
+    add(GraduateListRequested(year: year));
   }
 
   @override
@@ -18,9 +18,10 @@ class GraduateListComponent extends Bloc<GraduateListEvent, GraduateListState> {
       yield GraduateListLoadInProgress();
       try {
         final List<GraduateCard> graduates =
-            await GraduateListRepository.getGraduates(year, faculty);
+            await GraduateListRepository.getGraduates(year);
         yield GraduateListLoadSuccess(graduates: graduates);
-      } catch (_) {
+      } catch (e) {
+        debugPrint("ERROR COMPONENT $e");
         yield GraduateListLoadFailure();
       }
     }

@@ -1,16 +1,17 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_application/data/model/graduate_card.dart';
 
 class GraduateInfo {
-  final int id;
+  final String id;
   final String firstName;
   final String secondName;
   final String patronymic;
   final String yearGraduate;
-  final String group;
+  final String email;
   final String locate;
   final String birthDay;
-  final String faculty;
-  final String speciality;
+  final UserScope scope;
+  final List<dynamic> links;
   final String placeWork;
   final String achievement;
   final String urlImage;
@@ -20,30 +21,29 @@ class GraduateInfo {
       @required this.firstName,
       @required this.secondName,
       @required this.patronymic,
+      @required this.email,
       @required this.yearGraduate,
-      @required this.group,
       @required this.locate,
       @required this.birthDay,
-      @required this.faculty,
-      @required this.speciality,
+      @required this.scope,
+      @required this.links,
       @required this.achievement,
       @required this.placeWork,
       @required this.urlImage});
 
   factory GraduateInfo.fromJson(Map<String, dynamic> json) {
     return GraduateInfo(
-        id: json['id'],
+        id: json['_id'],
         firstName: json['firstName'],
         yearGraduate: json['yearGraduate'],
         secondName: json['secondName'],
-        urlImage: json['urlImage'],
+        urlImage: json['imageUrl'],
         patronymic: json['patronymic'],
-        group: json['group'],
-        birthDay: json['birthDay'],
-        speciality: json['speciality'],
+        birthDay: json['birthday'],
         achievement: json['achievement'],
-        placeWork: json['placeWork'],
-        faculty: json['faculty'],
+        links: json['links'],
+        placeWork: json['workPlace'],
+        scope: UserScope.fromJson(json['scope']),
         locate: json['locate']);
   }
 }

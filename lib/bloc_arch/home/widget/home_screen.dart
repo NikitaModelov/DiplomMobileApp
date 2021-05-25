@@ -2,6 +2,7 @@ import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/bloc_arch/graduateinfo/widget/graduate_info_screen.dart';
 import 'package:flutter_application/bloc_arch/graduates/widget/graduate_list_screen.dart';
+import 'package:flutter_application/bloc_arch/profile/widget/profile_screen.dart';
 import 'package:flutter_application/bloc_arch/settings/widget/setting_screen.dart';
 import 'package:flutter_application/bloc_arch/splash/widget/splash_screen.dart';
 import 'package:flutter_application/screens/faculty.dart';
@@ -24,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     GraduateListScreen(),
     Faculty(),
     Party(),
-    Profile()
+    ProfileScreen()
   ];
 
   void _onItemTapped(int index) {
