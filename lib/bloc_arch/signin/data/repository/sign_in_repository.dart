@@ -13,7 +13,7 @@ class SignInRepository {
 
       box.put(TokenKey.ACCESS_TOKEN, response.result.token);
       box.put(TokenKey.REFRESH_TOKEN, response.result.refreshToken);
-      box.close();
+
     } else {
       debugPrint("fdsfdsf");
     }
@@ -34,7 +34,6 @@ class SignInRepository {
       if (response.statusCode == 200) {
         box.put(TokenKey.ACCESS_TOKEN, response.result.token);
         box.put(TokenKey.REFRESH_TOKEN, response.result.refreshToken);
-        box.close();
 
         return 202;
       } else {
@@ -49,7 +48,7 @@ class SignInRepository {
 
     var code = await SignInApiService.logOut(token);
     if (code == 200) {
-      box.clear();
+
       return 200;
     }
   }
@@ -57,7 +56,6 @@ class SignInRepository {
   static Future<Result<TokenPair>> _refreshToken() async {
     var box = await Hive.openBox(HiveBoxes.CONFIGURATION);
     var token = box.get(TokenKey.REFRESH_TOKEN);
-    box.close();
 
     return SignInApiService.refreshToken(token);
   }

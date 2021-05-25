@@ -1,11 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/utills/logo_link_helper.dart';
+import 'package:intent/action.dart' as android_action;
+import 'package:intent/extra.dart' as android_extra;
+import 'package:intent/intent.dart' as android_intent;
+import 'package:intent/typedExtra.dart' as android_typedExtra;
+import 'package:url_launcher/url_launcher.dart';
 
 class LinkDialog extends StatelessWidget {
   final String firstName;
+  final List<dynamic> links;
 
-  LinkDialog({@required this.firstName});
+  LinkDialog({@required this.firstName, @required this.links});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +23,7 @@ class LinkDialog extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 "Для связи с $firstName, воспользуйтесь одной из социальных сетей.",
@@ -30,47 +36,23 @@ class LinkDialog extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  _buildRowLink(
-                    link: "@jhfdsljfhbdsf",
-                    type: TypeLink.vk,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  _buildRowLink(
-                    link: "@jhfdsljfhbdsf",
-                    type: TypeLink.instagram,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  _buildRowLink(
-                    link: "@jhfdsljfhbdsf",
-                    type: TypeLink.tikTok,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  _buildRowLink(
-                    link: "jhfds@ljfhbd.ru",
-                    type: TypeLink.youTube,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "Пожалуйста, уважайте чужую личную жизнь.",
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
-                ],
-              )
+              Container(
+                height: 170,
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      crossAxisSpacing: 2,
+                      mainAxisSpacing: 2,
+                      maxCrossAxisExtent: 80),
+                  itemBuilder: (context, index) {
+                    return _linkButton(type: TypeLink.vk, link: links[index]);
+                  },
+                  itemCount: links.length,
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              _info
             ],
           ),
         ),
@@ -78,25 +60,47 @@ class LinkDialog extends StatelessWidget {
     );
   }
 
-  Row _buildRowLink({@required TypeLink type, @required String link}) {
-    return Row(
-      children: [
-        // LogoLinkHelper.getLogoImage(type),
-        Container(
-          height: 32,
-          width: 32,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: LogoLinkHelper.getLogoImage(type),
-            ),
+  String parseUrl(String value) {
+    return value.replaceAll('https://', '');
+  }
+
+  var _info = Text(
+    "Пожалуйста, уважайте чужую личную жизнь.",
+    style: TextStyle(
+      fontSize: 12,
+      color: Colors.grey,
+      fontWeight: FontWeight.bold,
+    ),
+  );
+
+  Container _buildRowLink({@required TypeLink type, @required String link}) {
+    return Container(
+      height: 40,
+      width: 40,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: LogoLinkHelper.getLogoImage(type),
+        ),
+      ),
+    );
+  }
+
+  Container _linkButton({@required TypeLink type, @required String link}) {
+    return Container(
+      height: 40,
+      width: 40,
+      child: ConstrainedBox(
+        constraints: BoxConstraints.expand(),
+        child: Ink.image(
+          image: LogoLinkHelper.getLogoImage(TypeLink.vk),
+          fit: BoxFit.fill,
+          child: InkWell(
+            onTap: () {
+              launch(link);
+            },
           ),
         ),
-
-        SizedBox(
-          width: 8,
-        ),
-        Text("$link"),
-      ],
+      ),
     );
   }
 }

@@ -186,6 +186,7 @@ class _GraduateInfoScreenState extends State<GraduateInfoScreen> {
               context: context,
               builder: (_) => LinkDialog(
                 firstName: graduate.firstName,
+                links: graduate.links,
               ),
             );
           },
