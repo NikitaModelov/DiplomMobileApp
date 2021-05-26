@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/data/model/graduate_info.dart';
+import 'package:graduate_stu/data/model/graduate_info.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_application/data/model/graduate_card.dart';
+import 'package:graduate_stu/data/model/graduate_card.dart';
 
 class NetworkData {
   static const String BASE_URL = "diplomstu.herokuapp.com";

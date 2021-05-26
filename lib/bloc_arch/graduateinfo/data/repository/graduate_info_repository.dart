@@ -1,7 +1,7 @@
-import 'package:flutter_application/bloc_arch/graduateinfo/data/api/graduate_info_api_service.dart';
-import 'package:flutter_application/data/model/graduate_info.dart';
-import 'package:flutter_application/utills/hive/hive_boxes.dart';
-import 'package:flutter_application/utills/token_key.dart';
+import 'package:graduate_stu/bloc_arch/graduateinfo/data/api/graduate_info_api_service.dart';
+import 'package:graduate_stu/data/model/graduate_info.dart';
+import 'package:graduate_stu/utills/hive/hive_boxes.dart';
+import 'package:graduate_stu/utills/token_key.dart';
 import 'package:hive/hive.dart';
 
 class GraduateInfoRepository {

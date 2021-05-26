@@ -1,20 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_application/bloc_arch/signin/data/repository/sign_in_repository.dart';
-import 'package:flutter_application/bloc_arch/splash/widget/splash_screen.dart';
-import 'package:flutter_application/main.dart';
+import 'package:graduate_stu/bloc_arch/signin/data/repository/sign_in_repository.dart';
+import 'package:graduate_stu/main.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const String routerName = "/settings";
 
   @override
   State<StatefulWidget> createState() => _SettingsScreen();
-
 }
 
 class _SettingsScreen extends State<SettingsScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +51,7 @@ class _SettingsScreen extends State<SettingsScreen> {
 
   AppBar _buildAppBar() {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
       elevation: 0.0,
       title: const Text(

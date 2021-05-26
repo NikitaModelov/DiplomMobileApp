@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:graduate_stu/data/service/students_service.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_application/data/service/students_service.dart';
 
 class TokenPair {
   final String token;

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_application/data/model/graduate_card.dart';
+import 'package:graduate_stu/data/model/graduate_card.dart';
 
 class GraduateInfo {
   final String id;

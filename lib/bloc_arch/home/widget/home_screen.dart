@@ -1,16 +1,16 @@
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/bloc_arch/graduateinfo/widget/graduate_info_screen.dart';
-import 'package:flutter_application/bloc_arch/graduates/widget/graduate_list_screen.dart';
-import 'package:flutter_application/bloc_arch/profile/widget/profile_screen.dart';
-import 'package:flutter_application/bloc_arch/settings/widget/setting_screen.dart';
-import 'package:flutter_application/bloc_arch/splash/widget/splash_screen.dart';
-import 'package:flutter_application/screens/faculty.dart';
-import 'package:flutter_application/screens/party.dart';
-import 'package:flutter_application/screens/profile.dart';
+import 'package:graduate_stu/bloc_arch/editprofile/edit_profile_screen.dart';
+import 'package:graduate_stu/bloc_arch/filter/filter_screen.dart';
+import 'package:graduate_stu/bloc_arch/graduateinfo/widget/graduate_info_screen.dart';
+import 'package:graduate_stu/bloc_arch/graduates/widget/graduate_list_screen.dart';
+import 'package:graduate_stu/bloc_arch/profile/widget/profile_screen.dart';
+import 'package:graduate_stu/bloc_arch/settings/widget/setting_screen.dart';
+import 'package:graduate_stu/bloc_arch/splash/widget/splash_screen.dart';
+import 'package:graduate_stu/screens/faculty.dart';
+import 'package:graduate_stu/screens/party.dart';
 
 class HomeScreen extends StatefulWidget {
-
   static const routeName = "/home";
 
   @override
@@ -18,14 +18,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   int _selectedIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
     GraduateListScreen(),
     Faculty(),
     Party(),
-    ProfileScreen()
+    ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -42,6 +41,10 @@ class _HomeScreenState extends State<HomeScreen> {
         GraduateInfoScreen.routeName: (context) => GraduateInfoScreen(),
         SettingsScreen.routerName: (context) => SettingsScreen(),
         SplashScreen.routerName: (context) => SplashScreen(),
+        EditProfileScreen.routerName: (context) => EditProfileScreen(),
+        FilterScreen.routerName: (context) => FilterScreen(),
+        GraduateListScreen.routeName: (context) => GraduateListScreen(),
+        HomeScreen.routeName: (context) => HomeScreen(),
       },
       home: Scaffold(
         extendBody: true,

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_application/bloc_arch/signin/data/api/sign_in_api_service.dart';
-import 'package:flutter_application/utills/hive/hive_boxes.dart';
-import 'package:flutter_application/utills/token_key.dart';
+import 'package:graduate_stu/bloc_arch/signin/data/api/sign_in_api_service.dart';
+import 'package:graduate_stu/utills/hive/hive_boxes.dart';
+import 'package:graduate_stu/utills/token_key.dart';
 import 'package:hive/hive.dart';
 
 class SignInRepository {
@@ -13,7 +13,6 @@ class SignInRepository {
 
       box.put(TokenKey.ACCESS_TOKEN, response.result.token);
       box.put(TokenKey.REFRESH_TOKEN, response.result.refreshToken);
-
     } else {
       debugPrint("fdsfdsf");
     }
@@ -48,7 +47,6 @@ class SignInRepository {
 
     var code = await SignInApiService.logOut(token);
     if (code == 200) {
-
       return 200;
     }
   }

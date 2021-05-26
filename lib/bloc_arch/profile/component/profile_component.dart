@@ -1,25 +1,28 @@
-import 'package:flutter_application/bloc_arch/profile/data/model/profile_model.dart';
-import 'package:flutter_application/bloc_arch/profile/data/repository/profile_repository.dart';
-import 'package:flutter_application/bloc_arch/profile/events/profile_events.dart';
-import 'package:flutter_application/bloc_arch/profile/states/profile_state.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graduate_stu/bloc_arch/profile/data/repository/profile_repository.dart';
+import 'package:graduate_stu/bloc_arch/profile/events/profile_events.dart';
+import 'package:graduate_stu/bloc_arch/profile/states/profile_states.dart';
 
 class ProfileComponent extends Bloc<ProfileEvent, ProfileState> {
   ProfileComponent() : super(null) {
-    add(ProfileRequested());
+    add(ProfileRequestedEvent());
   }
 
   @override
   Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
-    if (event is ProfileRequested) {
-      yield ProfileLoading();
+    if (event is ProfileRequestedEvent) {
+      yield ProfileLoadingState();
       try {
-        final Profile profile = await ProfileRepository.getProfile();
+        final profile = await ProfileRepository.getProfile();
         if (profile != null) {
-          yield ProfileSuccess(profile: profile);
+          yield ProfileSuccessState(profile);
+        } else {
+          yield ProfileErrorState();
         }
-      } catch (_) {
-        yield ProfileFailure();
+      } catch (e) {
+        debugPrint("ProfileComponent error: $e");
+        yield ProfileErrorState();
       }
     }
   }

@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/bloc_arch/home/widget/home_screen.dart';
-import 'package:flutter_application/bloc_arch/signin/data/api/sign_in_api_service.dart';
-import 'package:flutter_application/bloc_arch/signin/data/repository/sign_in_repository.dart';
-import 'package:flutter_application/utills/hive/hive_boxes.dart';
-import 'package:flutter_application/utills/token_key.dart';
-import 'package:hive/hive.dart';
+import 'package:graduate_stu/bloc_arch/home/widget/home_screen.dart';
+import 'package:graduate_stu/bloc_arch/signin/data/api/sign_in_api_service.dart';
+import 'package:graduate_stu/bloc_arch/signin/data/repository/sign_in_repository.dart';
 
 class LoginPage extends StatefulWidget {
   static const String routeName = '/login_page';

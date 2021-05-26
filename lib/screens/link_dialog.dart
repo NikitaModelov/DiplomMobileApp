@@ -1,10 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/utills/logo_link_helper.dart';
-import 'package:intent/action.dart' as android_action;
-import 'package:intent/extra.dart' as android_extra;
-import 'package:intent/intent.dart' as android_intent;
-import 'package:intent/typedExtra.dart' as android_typedExtra;
+import 'package:graduate_stu/utills/logo_link_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LinkDialog extends StatelessWidget {

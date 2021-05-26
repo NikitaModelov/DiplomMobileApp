@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_application/bloc_arch/signin/data/api/sign_in_api_service.dart';
+import 'package:graduate_stu/bloc_arch/signin/data/api/sign_in_api_service.dart';
 
 abstract class SignInEvents extends Equatable {
   const SignInEvents();

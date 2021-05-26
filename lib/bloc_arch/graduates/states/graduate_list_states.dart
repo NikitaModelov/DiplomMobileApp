@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_application/data/model/graduate_card.dart';
+import 'package:graduate_stu/data/model/graduate_card.dart';
 
 abstract class GraduateListState extends Equatable {
   const GraduateListState();
