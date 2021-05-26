@@ -1,10 +1,9 @@
-import 'package:flutter_application/bloc_arch/signin/data/repository/sign_in_repository.dart';
-import 'package:flutter_application/bloc_arch/splash/events/splash_events.dart';
-import 'package:flutter_application/bloc_arch/splash/states/splash_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graduate_stu/bloc_arch/signin/data/repository/sign_in_repository.dart';
+import 'package:graduate_stu/bloc_arch/splash/events/splash_events.dart';
+import 'package:graduate_stu/bloc_arch/splash/states/splash_states.dart';
 
 class SplashComponent extends Bloc<SplashEvents, SplashState> {
-
   SplashComponent() : super(null) {
     add(SplashRequested());
   }
@@ -25,5 +24,4 @@ class SplashComponent extends Bloc<SplashEvents, SplashState> {
       }
     }
   }
-
 }

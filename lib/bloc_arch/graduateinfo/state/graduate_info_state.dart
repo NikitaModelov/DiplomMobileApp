@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_application/data/model/graduate_info.dart';
+import 'package:graduate_stu/data/model/graduate_info.dart';
 
 abstract class GraduateInfoState extends Equatable {
   const GraduateInfoState();

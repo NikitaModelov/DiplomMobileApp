@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:graduate_stu/data/model/graduate_card.dart';
 
-class GraduateInfo {
+class Profile {
   final String id;
   final String firstName;
   final String secondName;
@@ -16,23 +15,23 @@ class GraduateInfo {
   final String achievement;
   final String urlImage;
 
-  GraduateInfo(
-      {@required this.id,
-      @required this.firstName,
-      @required this.secondName,
-      @required this.patronymic,
-      @required this.email,
-      @required this.yearGraduate,
-      @required this.locate,
-      @required this.birthDay,
-      @required this.scope,
-      @required this.links,
-      @required this.achievement,
-      @required this.placeWork,
-      @required this.urlImage});
+  Profile(
+      {this.id,
+        this.firstName,
+        this.secondName,
+        this.patronymic,
+        this.email,
+        this.yearGraduate,
+        this.locate,
+        this.birthDay,
+        this.scope,
+        this.links,
+        this.achievement,
+        this.placeWork,
+        this.urlImage});
 
-  factory GraduateInfo.fromJson(Map<String, dynamic> json) {
-    return GraduateInfo(
+  factory Profile.fromJson(Map<String, dynamic> json) {
+    return Profile(
         id: json['_id'],
         firstName: json['firstName'],
         yearGraduate: json['yearGraduate'],

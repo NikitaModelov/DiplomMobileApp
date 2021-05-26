@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/bloc_arch/home/widget/home_screen.dart';
-import 'package:flutter_application/bloc_arch/signin/widget/sign_in_screen_test.dart';
-import 'package:flutter_application/bloc_arch/splash/component/splash_component.dart';
-import 'package:flutter_application/bloc_arch/splash/states/splash_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graduate_stu/bloc_arch/home/widget/home_screen.dart';
+import 'package:graduate_stu/bloc_arch/signin/widget/sign_in_screen_test.dart';
+import 'package:graduate_stu/bloc_arch/splash/component/splash_component.dart';
+import 'package:graduate_stu/bloc_arch/splash/states/splash_states.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routerName = "/splash";
@@ -87,7 +87,7 @@ class _SplashScreenState extends State<SplashScreen> {
         if (state is SplashSuccess) {
           debugPrint("Success state");
           Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-        } else if (state is SplashFailure){
+        } else if (state is SplashFailure) {
           debugPrint("Error state");
           Navigator.pushReplacementNamed(context, LoginPage.routeName);
         }
@@ -104,7 +104,7 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  /*@override
+/*@override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SplashComponent(),

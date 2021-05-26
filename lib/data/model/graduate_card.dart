@@ -25,7 +25,7 @@ class GraduateCard {
         secondName: json['secondName'],
         urlImage: json['imageUrl'],
         patronymic: json['patronymic'],
-        scope: json['scope'],
+        scope: UserScope.fromJson(json['scope']),
         id: json['_id']);
   }
 }
@@ -37,4 +37,11 @@ class UserScope {
 
   UserScope(
       {@required this.group, @required this.faculty, @required this.specialty});
+
+  factory UserScope.fromJson(Map<String, dynamic> json) {
+    return UserScope(
+        group: json['group'],
+        faculty: json['faculty'],
+        specialty: json['specialty']);
+  }
 }

@@ -1,7 +1,7 @@
-import 'package:flutter_application/bloc_arch/signin/data/repository/sign_in_repository.dart';
-import 'package:flutter_application/bloc_arch/signin/event/sign_in_events.dart';
-import 'package:flutter_application/bloc_arch/signin/state/sign_in_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graduate_stu/bloc_arch/signin/data/repository/sign_in_repository.dart';
+import 'package:graduate_stu/bloc_arch/signin/event/sign_in_events.dart';
+import 'package:graduate_stu/bloc_arch/signin/state/sign_in_state.dart';
 
 class SingInComponent extends Bloc<SignInEvents, SignInState> {
   SingInComponent() : super(null) {

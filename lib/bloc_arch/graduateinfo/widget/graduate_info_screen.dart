@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/bloc_arch/common/error_screen.dart';
-import 'package:flutter_application/bloc_arch/graduateinfo/component/graduate_info_component.dart';
-import 'package:flutter_application/bloc_arch/graduateinfo/events/graduate_info_events.dart';
-import 'package:flutter_application/bloc_arch/graduateinfo/state/graduate_info_state.dart';
-import 'package:flutter_application/bloc_arch/graduates/widget/graduate_list_screen.dart';
-import 'package:flutter_application/data/model/graduate_info.dart';
-import 'package:flutter_application/screens/link_dialog.dart';
+import 'package:graduate_stu/bloc_arch/common/error_screen.dart';
+import 'package:graduate_stu/bloc_arch/graduateinfo/component/graduate_info_component.dart';
+import 'package:graduate_stu/bloc_arch/graduateinfo/events/graduate_info_events.dart';
+import 'package:graduate_stu/bloc_arch/graduateinfo/state/graduate_info_state.dart';
+import 'package:graduate_stu/bloc_arch/graduates/widget/graduate_list_screen.dart';
+import 'package:graduate_stu/data/model/graduate_info.dart';
+import 'package:graduate_stu/screens/link_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -109,7 +109,7 @@ class _GraduateInfoScreenState extends State<GraduateInfoScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildTextBlockColumn("ФИО",
-                  "${graduate.patronymic} ${graduate.firstName} ${graduate.patronymic}"),
+                  "${graduate.secondName} ${graduate.firstName} ${graduate.patronymic}"),
               SizedBox(
                 height: 20,
               ),
@@ -117,15 +117,15 @@ class _GraduateInfoScreenState extends State<GraduateInfoScreen> {
               SizedBox(
                 height: 20,
               ),
-              _buildTextBlockColumn("Факультет", graduate.faculty),
+              _buildTextBlockColumn("Факультет", graduate.scope.faculty),
               SizedBox(
                 height: 20,
               ),
-              _buildTextBlockColumn("Специальность", graduate.speciality),
+              _buildTextBlockColumn("Специальность", graduate.scope.specialty),
               SizedBox(
                 height: 20,
               ),
-              _buildTextBlockColumn("Группа", graduate.group),
+              _buildTextBlockColumn("Группа", graduate.scope.group),
               SizedBox(
                 height: 20,
               ),
@@ -186,6 +186,7 @@ class _GraduateInfoScreenState extends State<GraduateInfoScreen> {
               context: context,
               builder: (_) => LinkDialog(
                 firstName: graduate.firstName,
+                links: graduate.links,
               ),
             );
           },
@@ -256,7 +257,7 @@ class _GraduateInfoScreenState extends State<GraduateInfoScreen> {
                     "Факультет",
                   ),
                   Text(
-                    graduate.faculty,
+                    graduate.scope.faculty,
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,

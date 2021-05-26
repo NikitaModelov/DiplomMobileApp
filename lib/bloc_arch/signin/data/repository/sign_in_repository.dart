@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_application/bloc_arch/signin/data/api/sign_in_api_service.dart';
-import 'package:flutter_application/utills/hive/hive_boxes.dart';
-import 'package:flutter_application/utills/token_key.dart';
+import 'package:graduate_stu/bloc_arch/signin/data/api/sign_in_api_service.dart';
+import 'package:graduate_stu/utills/hive/hive_boxes.dart';
+import 'package:graduate_stu/utills/token_key.dart';
 import 'package:hive/hive.dart';
 
 class SignInRepository {
@@ -13,7 +13,6 @@ class SignInRepository {
 
       box.put(TokenKey.ACCESS_TOKEN, response.result.token);
       box.put(TokenKey.REFRESH_TOKEN, response.result.refreshToken);
-      box.close();
     } else {
       debugPrint("fdsfdsf");
     }
@@ -34,7 +33,6 @@ class SignInRepository {
       if (response.statusCode == 200) {
         box.put(TokenKey.ACCESS_TOKEN, response.result.token);
         box.put(TokenKey.REFRESH_TOKEN, response.result.refreshToken);
-        box.close();
 
         return 202;
       } else {
@@ -49,7 +47,6 @@ class SignInRepository {
 
     var code = await SignInApiService.logOut(token);
     if (code == 200) {
-      box.clear();
       return 200;
     }
   }
@@ -57,7 +54,6 @@ class SignInRepository {
   static Future<Result<TokenPair>> _refreshToken() async {
     var box = await Hive.openBox(HiveBoxes.CONFIGURATION);
     var token = box.get(TokenKey.REFRESH_TOKEN);
-    box.close();
 
     return SignInApiService.refreshToken(token);
   }

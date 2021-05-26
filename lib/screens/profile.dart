@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/bloc_arch/settings/widget/setting_screen.dart';
-import 'package:flutter_application/utills/size.dart';
+import 'package:graduate_stu/bloc_arch/settings/widget/setting_screen.dart';
 
+@Deprecated("")
 class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

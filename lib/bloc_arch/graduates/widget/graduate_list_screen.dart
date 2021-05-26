@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/bloc_arch/common/error_screen.dart';
-import 'package:flutter_application/bloc_arch/graduateinfo/widget/graduate_info_screen.dart';
-import 'package:flutter_application/bloc_arch/graduates/component/graduate_list_component.dart';
-import 'package:flutter_application/bloc_arch/graduates/events/graduate_list_event.dart';
-import 'package:flutter_application/bloc_arch/graduates/states/graduate_list_states.dart';
-import 'package:flutter_application/data/model/graduate_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graduate_stu/bloc_arch/common/error_screen.dart';
+import 'package:graduate_stu/bloc_arch/filter/filter_screen.dart';
+import 'package:graduate_stu/bloc_arch/graduateinfo/widget/graduate_info_screen.dart';
+import 'package:graduate_stu/bloc_arch/graduates/component/graduate_list_component.dart';
+import 'package:graduate_stu/bloc_arch/graduates/events/graduate_list_event.dart';
+import 'package:graduate_stu/bloc_arch/graduates/states/graduate_list_states.dart';
+import 'package:graduate_stu/data/model/graduate_card.dart';
 import 'package:grouped_list/grouped_list.dart';
 
 class GraduateListScreenArg {
@@ -27,43 +28,147 @@ class _GraduateListScreenState extends State<GraduateListScreen> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
 
+  DateTime _dateFromFilter = DateTime.now();
+  String _group = "";
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GraduateListComponent('2021', 'Бизнес-информатика'),
+      create: (context) => GraduateListComponent(_dateFromFilter.year.toString(), _group),
       child: BlocBuilder<GraduateListComponent, GraduateListState>(
         builder: (context, state) {
           if (state is GraduateListLoadSuccess) {
+            debugPrint("SUCCESS STATE");
             return Scaffold(
-              appBar: _buildAppBar(),
+              appBar: AppBar(
+                backgroundColor: Colors.white,
+                elevation: 0.0,
+                title: const Text(
+                  "Выпускники",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 24,
+                  ),
+                ),
+                actions: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.filter_list, color: Colors.black),
+                    onPressed: () async {
+                      Map results = await Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
+                        return new FilterScreen();
+                      }));
+
+                      if (results != null && results.containsKey('year')) {
+                        setState(() {
+                          _dateFromFilter = results['year'];
+                          _group = results['group'] == "Все" ? "" : results['group'];
+                          BlocProvider.of<GraduateListComponent>(context)
+                              .add(GraduateListRequested(year: _dateFromFilter.year.toString(), group: _group));
+                          print(_dateFromFilter);
+                        });
+                      }
+                    },
+                  ),
+                ],
+              ),
               body: RefreshIndicator(
                 color: Colors.blue,
                 key: _refreshIndicatorKey,
                 onRefresh: () async {
-                  BlocProvider.of<GraduateListComponent>(context).add(
-                      GraduateListRequested(
-                          year: '2021', faculty: 'Бизнес-информатика'));
+                  BlocProvider.of<GraduateListComponent>(context)
+                      .add(GraduateListRequested(year: _dateFromFilter.year.toString(), group: _group));
                 },
                 child: _buildList(state.graduates),
               ),
             );
           } else if (state is GraduateListLoadInProgress) {
+            debugPrint("PROGRESS STATE");
             return Scaffold(
-              appBar: _buildAppBar(),
+              appBar: AppBar(
+                backgroundColor: Colors.white,
+                elevation: 0.0,
+                title: const Text(
+                  "Выпускники",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 24,
+                  ),
+                ),
+                actions: <Widget>[
+                  IconButton(
+                    color: Colors.black,
+                    icon: Icon(Icons.search),
+                    onPressed: () {},
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.filter_list, color: Colors.black),
+                    onPressed: () async {
+                      Map results = await Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
+                        return new FilterScreen();
+                      }));
+
+                      if (results != null && results.containsKey('year')) {
+                        setState(() {
+                          _dateFromFilter = results['year'];
+                          _group = results['group'] == "Все" ? "" : results['group'];
+                          BlocProvider.of<GraduateListComponent>(context)
+                              .add(GraduateListRequested(year: _dateFromFilter.year.toString(), group: _group));
+                          print(_dateFromFilter);
+                        });
+                      }
+                    },
+                  ),
+                ],
+              ),
               body: Center(
                 child: CircularProgressIndicator(),
               ),
             );
           } else {
+            debugPrint("ERROR STATE");
             return Scaffold(
-              appBar: _buildAppBar(),
+              appBar: AppBar(
+                backgroundColor: Colors.white,
+                elevation: 0.0,
+                title: const Text(
+                  "Выпускники",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 24,
+                  ),
+                ),
+                actions: <Widget>[
+                  IconButton(
+                    color: Colors.black,
+                    icon: Icon(Icons.search),
+                    onPressed: () {},
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.filter_list, color: Colors.black),
+                    onPressed: () async {
+                      Map results = await Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context){
+                        return new FilterScreen();
+                      }));
+
+                      if (results != null && results.containsKey('year')) {
+                        setState(() {
+                          _dateFromFilter = results['year'];
+                          _group = results['group'] == "Все" ? "" : results['group'];
+                          BlocProvider.of<GraduateListComponent>(context)
+                              .add(GraduateListRequested(year: _dateFromFilter.year.toString(), group: _group));
+                          print(_dateFromFilter);
+                        });
+                      }
+                    },
+                  ),
+                ],
+              ),
               body: RefreshIndicator(
                   color: Colors.blue,
                   key: _refreshIndicatorKey,
                   onRefresh: () async {
-                    BlocProvider.of<GraduateListComponent>(context).add(
-                        GraduateListRequested(
-                            year: '2021', faculty: 'Бизнес-информатика'));
+                    BlocProvider.of<GraduateListComponent>(context)
+                        .add(GraduateListRequested(year: _dateFromFilter.year.toString(), group: _group));
                   },
                   child: ErrorScreen()),
             );
@@ -125,31 +230,6 @@ class _GraduateListScreenState extends State<GraduateListScreen> {
           ),
         );
       },
-    );
-  }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0.0,
-      title: const Text(
-        "Выпускники",
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 24,
-        ),
-      ),
-      actions: <Widget>[
-        IconButton(
-          color: Colors.black,
-          icon: Icon(Icons.search),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: Icon(Icons.filter_list, color: Colors.black),
-          onPressed: () {},
-        ),
-      ],
     );
   }
 }
